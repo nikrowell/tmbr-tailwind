@@ -1,0 +1,20 @@
+{
+  "name": "@tmbr/tailwind",
+  "version": "0.1.0",
+  "repository": "github:nikrowell/tmbr-tailwind",
+  "type": "module",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "vitest": "^1.1.0"
+  }
+}
