@@ -49,7 +49,7 @@ Override the default min viewport width (**375**), the max viewport width (**168
 <!-- override min (uses default max) -->
 <div class="f-p-[16,32,400]">
 
-<!-- override max (uses default min) - note empty value without spaces -->
+<!-- override max (uses default min) - empty value without spaces -->
 <div class="f-p-[16,32,,800]">
 ```
 
