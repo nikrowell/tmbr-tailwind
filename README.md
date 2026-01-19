@@ -62,13 +62,13 @@ Override the default min viewport width (**375**), the max viewport width (**168
 
 ## Quick Reference
 
-| Syntax                 | Output                                          |
-|------------------------| ------------------------------------------------|
-| `f-p-[16,32]`          | `clamp(1rem, ..., 2rem)` - px converted to rem  |
-| `f-mt-[-16,-32]`       | negative values                                 |
-| `f-p-[40,60,800,1200]` | custom viewports (800-1200px, converted to rem) |
-| `f-p-[20,30,,800]`     | default min, custom max                         |
-| `f-p-[10,20,400]`      | custom min, default max                         |
+| Syntax                 | Output                                            |
+|------------------------| --------------------------------------------------|
+| `f-text-[16,20]`       | `clamp(1rem, ..., 1.25rem)` - px converted to rem |
+| `f-p-[40,60,800,1200]` | custom viewports (800-1200px, converted to rem)   |
+| `f-p-[20,30,,800]`     | default min, custom max                           |
+| `f-p-[10,20,400]`      | custom min, default max                           |
+| `f-mt-[-16,-32]`       | negative values                                   |
 
 ## Available Utilities
 

@@ -66,6 +66,13 @@ function round(n, precision = 3) {
   return Math.round(n * d) / d;
 }
 
+function style(property, value) {
+  const properties = Array.isArray(property) ? property : [property];
+  const result = {};
+  for (const key of properties) result[key] = value;
+  return result;
+}
+
 function calculate(value, options) {
 
   let args = value.split(',');
@@ -88,31 +95,37 @@ function calculate(value, options) {
   return `clamp(${round(minValue)}rem, ${round(y)}rem + ${round(slope * 100)}vw, ${round(maxValue)}rem)`;
 }
 
-function style(property, value) {
-  const properties = Array.isArray(property) ? property : [property];
-  const result = {};
-  for (const key of properties) result[key] = value;
-  return result;
-}
-
 export default plugin.withOptions((options = {}) => {
 
-  options = {
-    base: options.base ?? 16,
-    vmin: options.vmin ?? 375,
-    vmax: options.vmax ?? 1680,
-  };
+  const { base = 16, vmin = 375, vmax = 1680, ...breakpoints } = options;
+  options = { base, vmin, vmax };
 
-  return ({ matchUtilities }) => {
+  return tailwind => {
 
     for (const [name, property] of Object.entries(utilities)) {
-      matchUtilities({
+      tailwind.matchUtilities({
         [name]: value => {
           const clamp = calculate(value, options);
           return style(property, clamp);
         },
       });
     }
+
+    for (const [name, px] of Object.entries(breakpoints)) {
+      const width = round(rem(px, 'px', base));
+      tailwind.addVariant(`below-${name}`, `@media (width <  ${width}rem)`);
+      tailwind.addVariant(`above-${name}`, `@media (width >= ${width}rem)`);
+    }
+
+    tailwind.matchVariant('below', value => {
+      const width = rem(value, 'px', base);
+      return `@media (width < ${round(width)}rem)`;
+    });
+
+    tailwind.matchVariant('above', value => {
+      const width = rem(value, 'px', base);
+      return `@media (width >= ${round(width)}rem)`;
+    });
   }
 });
 
