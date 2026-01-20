@@ -3,4 +3,5 @@
 .cursor
 .vscode
 .env
+CLAUDE.md
 node_modules
