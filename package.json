@@ -1,11 +1,22 @@
 {
   "name": "@tmbr/tailwind",
   "version": "1.1.0",
+  "description": "Tailwind plugin for effortless fluid properties",
   "repository": "github:nikrowell/tmbr-tailwind",
   "type": "module",
   "main": "index.js",
   "files": [
     "index.js"
+  ],
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "plugin",
+    "fluid",
+    "clamp",
+    "typography",
+    "spacing",
+    "css"
   ],
   "scripts": {
     "test": "vitest"
