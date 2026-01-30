@@ -127,6 +127,17 @@ export default plugin.withOptions((options = {}) => {
       const width = rem(value, 'px', base);
       return `@media (width >= ${round(width)}rem)`;
     });
+
+    const zIndex = tailwind.theme('z') ?? {};
+
+    for (const [name] of Object.entries(zIndex)) {
+      if (name.startsWith('__')) continue;
+      tailwind.addUtilities({
+        [`.z-${name}`]:       { 'z-index': `var(--z-${name})` },
+        [`.z-above-${name}`]: { 'z-index': `calc(var(--z-${name}) + 1)` },
+        [`.z-below-${name}`]: { 'z-index': `calc(var(--z-${name}) - 1)` },
+      });
+    }
   }
 });
 
