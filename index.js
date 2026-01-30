@@ -97,7 +97,7 @@ function calculate(value, options) {
 
 export default plugin.withOptions((options = {}) => {
 
-  const { base = 16, vmin = 375, vmax = 1680, ...breakpoints } = options;
+  const { base = 16, vmin = 375, vmax = 1680 } = options;
   options = { base, vmin, vmax };
 
   return tailwind => {
@@ -111,10 +111,11 @@ export default plugin.withOptions((options = {}) => {
       });
     }
 
-    for (const [name, px] of Object.entries(breakpoints)) {
-      const width = round(rem(px, 'px', base));
-      tailwind.addVariant(`below-${name}`, `@media (width <  ${width}rem)`);
-      tailwind.addVariant(`above-${name}`, `@media (width >= ${width}rem)`);
+    const breakpoint = tailwind.theme('breakpoint') ?? {};
+    for (const [name, width] of Object.entries(breakpoint)) {
+      if (name.startsWith('__')) continue;
+      tailwind.addVariant(`below-${name}`, `@media (width <  ${width})`);
+      tailwind.addVariant(`above-${name}`, `@media (width >= ${width})`);
     }
 
     tailwind.matchVariant('below', value => {
