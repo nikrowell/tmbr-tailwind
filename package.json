@@ -1,6 +1,6 @@
 {
   "name": "@tmbr/tailwind",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Tailwind plugin for effortless fluid properties",
   "repository": "github:nikrowell/tmbr-tailwind",
   "type": "module",
