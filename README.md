@@ -1,6 +1,6 @@
 # TMBR Tailwind
 
-A [Tailwind CSS](https://tailwindcss.com/) plugin that generates utility classes for fluid properties using `clamp()`. Heavily inspired by [fluid-tailwindcss](https://fluid-tailwindcss.vercel.app/).
+A [Tailwind CSS](https://tailwindcss.com/) plugin for fluid properties, breakpoint variants, and semantic z-index management.
 
 ## Installation
 
@@ -13,19 +13,9 @@ npm install @tmbr/tailwind
 @plugin '@tmbr/tailwind';
 ```
 
-Override the default **375** and **1680** viewport values:
+## Fluid Utilities
 
-```css
-@import 'tailwindcss';
-@plugin '@tmbr/tailwind' {
-  vmin: 320;
-  vmax: 1920;
-};
-```
-
-## Usage
-
-All values are written as px and converted to rem:
+Generate fluid CSS values using `clamp()` for smooth scaling between viewport sizes - inspired by [fluid-tailwindcss](https://fluid-tailwindcss.vercel.app/). All values are written as px and converted to rem:
 
 ```html
 <div class="f-p-[16,32]">
@@ -53,6 +43,14 @@ Override the default min viewport width (**375**), the max viewport width (**168
 <div class="f-p-[16,32,,800]">
 ```
 
+You can also globally override the defaults when registering the plugin:
+```css
+@plugin '@tmbr/tailwind' {
+  vmin: 320;
+  vmax: 1920;
+};
+```
+
 ### Negative values:
 
 ```html
@@ -60,7 +58,7 @@ Override the default min viewport width (**375**), the max viewport width (**168
 <!-- margin-top: clamp(-1rem, ..., -2rem) -->
 ```
 
-## Quick Reference
+### Quick Reference
 
 | Syntax                 | Output                                            |
 |------------------------| --------------------------------------------------|
@@ -70,7 +68,7 @@ Override the default min viewport width (**375**), the max viewport width (**168
 | `f-p-[10,20,400]`      | custom min, default max                           |
 | `f-mt-[-16,-32]`       | negative values                                   |
 
-## Available Utilities
+### Available Utilities
 
 | Category   | Utilities                                                                                 |
 |------------|-------------------------------------------------------------------------------------------|
@@ -82,3 +80,58 @@ Override the default min viewport width (**375**), the max viewport width (**168
 | Position   | `f-inset`, `f-inset-x`, `f-inset-y`, `f-top`, `f-right`, `f-bottom`, `f-left`             |
 | Border     | `f-rounded`, `f-rounded-t/r/b/l`, `f-rounded-tl/tr/br/bl`, `f-border`, `f-border-t/r/b/l` |
 | Flex       | `f-basis`                                                                                 |
+
+## Breakpoint Variants
+
+Use `above-{name}` and `below-{name}` variants for responsive styles based on your theme's breakpoints. These read from `@theme --breakpoint-{name}` variables:
+
+```css
+@theme {
+  --breakpoint-xs: 30rem;
+  --breakpoint-nav: 1280px;
+}
+```
+
+```html
+<div class="above-xs:flex">
+<!-- @media (width >= 30rem) { display: flex } -->
+
+<div class="below-nav:hidden">
+<!-- @media (width < 1280px) { display: none } -->
+```
+
+Arbitrary values (px onverted to rem) are also supported:
+
+```html
+<div class="above-[600]:text-lg">
+<!-- @media (width >= 37.5rem) { font-size: ... } -->
+```
+
+## Z-Index Utilities
+
+Semantic z-index utilities that read from `@theme --z-{name}` variables. Useful for managing stacking contexts with meaningful names.
+
+```css
+@theme {
+  --z-header: 100;
+  --z-modal: 1000;
+  --z-tooltip: 1001;
+}
+```
+
+```html
+<div class="z-modal">
+<!-- z-index: var(--z-modal) -->
+
+<div class="z-above-modal">
+<!-- z-index: calc(var(--z-modal) + 1) -->
+
+<div class="z-below-modal">
+<!-- z-index: calc(var(--z-modal) - 1) -->
+```
+
+| Utility           | Output                              |
+|-------------------|-------------------------------------|
+| `z-{name}`        | `z-index: var(--z-{name})`          |
+| `z-above-{name}`  | `z-index: calc(var(--z-{name}) + 1)`|
+| `z-below-{name}`  | `z-index: calc(var(--z-{name}) - 1)`|
