@@ -1,6 +1,6 @@
 # TMBR Tailwind
 
-A [Tailwind CSS](https://tailwindcss.com/) plugin for fluid properties, breakpoint variants, and semantic z-index management.
+A [Tailwind](https://tailwindcss.com/) plugin for fluid properties, breakpoint variants, and semantic z-index utilities.
 
 ## Installation
 
