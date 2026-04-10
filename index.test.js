@@ -10,12 +10,12 @@ const options = {
 describe('utilities', () => {
 
   it('has correct properties', () => {
-    expect(utilities['f-size']).toEqual(['width', 'height']);
-    expect(utilities['f-mx']).toEqual(['margin-left', 'margin-right']);
-    expect(utilities['f-px']).toEqual(['padding-left', 'padding-right']);
-    expect(utilities['f-text']).toBe('font-size');
-    expect(utilities['f-gap-x']).toBe('column-gap');
-    expect(utilities['f-gap-y']).toBe('row-gap');
+    expect(utilities['size']).toEqual(['width', 'height']);
+    expect(utilities['mx']).toEqual(['margin-left', 'margin-right']);
+    expect(utilities['px']).toEqual(['padding-left', 'padding-right']);
+    expect(utilities['text']).toBe('font-size');
+    expect(utilities['gap-x']).toBe('column-gap');
+    expect(utilities['gap-y']).toBe('row-gap');
   });
 });
 

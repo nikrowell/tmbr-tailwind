@@ -46,6 +46,7 @@ Override the default min viewport width (**375**), the max viewport width (**168
 You can also globally override the defaults when registering the plugin:
 ```css
 @plugin '@tmbr/tailwind' {
+  prefix: 'fluid-';
   vmin: 320;
   vmax: 1920;
 };
@@ -61,7 +62,7 @@ You can also globally override the defaults when registering the plugin:
 ### Quick Reference
 
 | Syntax                 | Output                                            |
-|------------------------| --------------------------------------------------|
+|------------------------|---------------------------------------------------|
 | `f-text-[16,20]`       | `clamp(1rem, ..., 1.25rem)` - px converted to rem |
 | `f-p-[40,60,800,1200]` | custom viewports (800-1200px, converted to rem)   |
 | `f-p-[20,30,,800]`     | default min, custom max                           |
